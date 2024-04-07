@@ -11,7 +11,7 @@ export default {
 <template>
   <div id="app">
     <AppHeader/>
-    <div class="container mt-5 d-flex justify-content-center align-items-center">
+    <div class="container">
       <router-view />
     </div>
   </div>
