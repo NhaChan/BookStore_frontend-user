@@ -1,7 +1,19 @@
 <template>
-    <div class="container mt-5">
+<div class="row">
+    <div class="d-flex flex-wrap mt-3">
+        <div v-for="(genre, index) in genres" :key="index" class="mb-1 me-1">
+            <button type="button" class="btn btn-light text-start" data-bs-toggle="button"
+                @click="toggleGenre(genre)">
+                {{ genre }}
+            </button>
+        </div>
+    </div>
+</div>
+
+
+    <div class="container">
         <div class="row">
-            <div class="mt-3 col-lg-12 col-md-6 col-sm-2">
+            <div class="mt-2 col-lg-12 col-md-6 col-sm-2">
                 <ProductList v-if="filteredProductsCount > 0" :products="filteredProducts"
                     v-model:activeIndex="activeIndex" />
             </div>
