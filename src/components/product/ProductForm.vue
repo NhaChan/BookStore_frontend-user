@@ -14,8 +14,8 @@
                         <div class="col-md-6">
                             <div>
                                 <div class="text-center">
-                                    <img :src="productLocal.imageUrl" class="" 
-                                    :style="{ width: '100%', maxWidth: '100%', borderTopLeftRadius: '50px', borderBottomLeftRadius: '50px' }">
+                                    <img :src="productLocal.imageUrl" class=""
+                                        :style="{ width: '100%', maxWidth: '100%', borderTopLeftRadius: '50px', borderBottomLeftRadius: '50px' }">
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,11 @@
                                     </button>
                                 </div>
                                 <div class="cart mt-4 align-items-center">
-                                    <button class="btn btn-primary  text-uppercase mr-2 px-4">
+                                    <!-- <button v-if="!isLoggedIn" class="btn btn-primary  text-uppercase mr-2 px-4"
+                                        disabled>
+                                        Thêm vào xem sau
+                                    </button> -->
+                                    <button class="btn btn-primary  text-uppercase mr-2 px-4" @click="addToCart">
                                         Thêm vào xem sau
                                     </button>
                                 </div>
@@ -57,6 +61,8 @@
 </template>
 
 <script>
+import cartService from "@/services/cart.service";
+import Cookies from "js-cookie";
 import { Form } from "vee-validate";
 
 export default {
@@ -72,6 +78,11 @@ export default {
             quantity: 1,
         };
     },
+    // mounted() {
+    //     // Kiểm tra xem người dùng đã đăng nhập hay chưa
+    //     const userId = Cookies.get("userId");   
+    //     this.isLoggedIn = !!userId; // Cập nhật giá trị biến isLoggedIn
+    // },
 
     methods: {
         increaseQuantity() {
@@ -81,13 +92,32 @@ export default {
             if (this.quantity > 1) {
                 this.quantity--;
             }
-        }
+        },
+        async addToCart() {
+            const quantity = this.quantity;
+            const userId = Cookies.get("userId");
+            const bookId = this.product._id;
+
+            const books = [{ bookId, quantity }];
+            const cartData = { userId, books };
+
+            try {
+                const check = await cartService.add(cartData);
+                if (check) {
+                    alert("Thêm vào giỏ hàng thành công!");
+                }
+
+            } catch (error) {
+                console.error("Lỗi khi thêm vào giỏ hàng:", error);
+                alert("Đã xảy ra lỗi khi thêm vào giỏ hàng. Vui lòng thử lại sau!");
+            }
+        },
     },
 };
 </script>
 
 <style>
     .card {
-        box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
     }
 </style>
