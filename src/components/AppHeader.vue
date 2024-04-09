@@ -33,18 +33,19 @@
               </li>
               <li><router-link to="#" class="dropdown-item" @click="confirmLogout">Đăng xuất</router-link></li>
             </ul>
-
           </div>
+
           <div v-if="!userName">
             <router-link :to="{ name: 'login' }" class="nav-link ">
               <i class="fas fa-user"></i>
             </router-link>
           </div>
-          <div>
-            <a href="#" class="btn btn-link text-decoration-none me-5 m-3"> <!-- Thêm các lớp CSS cần thiết cho nút -->
-              <i class="fas fa-shopping-cart text-black"></i> <!-- Thêm biểu tượng giỏ hàng -->
-            </a>
-          </div>
+
+        </div>
+        <div v-if="userName" class="btn btn-link text-decoration-none me-5 m-3">
+          <router-link :to="{ name: 'cart', params: { id: userId } }">
+            <i class="fas fa-shopping-cart text-black"></i>
+          </router-link>
         </div>
       </div>
     </div>
@@ -68,9 +69,12 @@ export default {
   },
   methods: {
     getUserName() {
-      const userName = Cookies.get('userName');
-      if (userName) {
-        this.userName = userName;
+      const name = Cookies.get('userName');
+      const id = Cookies.get('userId');
+      // console.log("userName:", userName);
+      if (name) {
+        this.userId = id;
+        this.userName = name;
       }
     },
     confirmLogout() {
