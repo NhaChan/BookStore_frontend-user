@@ -6,9 +6,9 @@
                     <div class="card-header">
                         <h5 class="text-center fw-bold">
                             <span :class="{
-                                'text-warning': order.status === 'Mượn',
-                                'text-primary': order.status === 'Đã trả',
-                                'text-danger': order.status === 'Đã hủy' 
+                                'text-warning': order.status === 'Đang chờ duyệt',
+                                'text-primary': order.status === 'Duyệt',
+                                'text-danger': order.status === 'Đã trả' 
                             }">{{ order.status }}</span>
                         </h5>
                     </div>
