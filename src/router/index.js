@@ -5,6 +5,7 @@ import LoginPage from "@/views/user/LoginPage.vue";
 import Home from "@/views/home/HomePage.vue";
 import ProductPage from "@/views/product/ProductPage.vue";
 import CartPage from "@/views/cart/CartPage.vue";
+import OrderPage from "@/views/order/OrderPage.vue";
 
 const routes = [
     {
@@ -32,6 +33,12 @@ const routes = [
         path: "/cart/:id",
         name: "cart",
         component: CartPage,
+        props: true
+    },
+    {
+        path: "/order/:id",
+        name: "order",
+        component: OrderPage,
         props: true
     },
     {

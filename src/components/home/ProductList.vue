@@ -16,9 +16,9 @@ export default {
                     <img :src="product.imageUrl" class="card-img-top mt-3 align-self-center d-flex" alt="Hình ảnh"
                         style="height: 200px; width: 200px; object-fit: contain;">
                     <div class="card-body">
-                        <p class="card-title text-success fw-bold">{{ product.title }}</p>
-                        <p class="card-text">Tác giả: {{ product.author }}</p>
-                        <p class="card-text">Thể loại: {{ product.genre }}</p>
+                        <p class="card-title text-success description-cell">{{ product.title }}</p>
+                        <p class="card-text description-cell">Tác giả: {{ product.author }}</p>
+                        <p class="card-text description-cell">Thể loại: {{ product.genre }}</p>
                     </div>
                 </div>
             </router-link>
@@ -36,6 +36,23 @@ export default {
 
 .card:hover {
     background-color: #f8f9fa;
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+.description-cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevents the text from wrapping */
+}
+
+/* Adjust the width at which the title gets truncated */
+@media (max-width: 768px) {
+    .description-cell {
+        max-width: 200px; /* Adjust as needed */
+    }
 }
 
 </style>

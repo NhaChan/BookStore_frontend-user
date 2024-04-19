@@ -8,9 +8,9 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 link-secondary">Trang chủ</a></li>
-          <li><a href="#" class="nav-link px-2 link-body-emphasis">Yêu thích</a></li>
-          <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
+          <li><a href="#" class="nav-link px-2 link-secondary">BookStore</a></li>
+          <!-- <li><a href="#" class="nav-link px-2 link-body-emphasis">Yêu thích</a></li>
+          <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li> -->
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -21,12 +21,14 @@
           <div class="dropdown text-end" v-if="userName">
             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
               data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+              <img src="https://i.pinimg.com/564x/9e/2a/c4/9e2ac4cebc6ee67df82fd0e317d9a5e5.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
               {{ userName }}
             </a>
             <ul class="dropdown-menu text-small" style="">
               <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
-              <li><a class="dropdown-item" href="#">Sách đã mượn</a></li>
+              <li>
+                <router-link :to="{ name: 'order', params: { id: userId }, }" class="dropdown-item">Sách đã mượn</router-link>
+              </li>
               <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
               <li>
                 <hr class="dropdown-divider">

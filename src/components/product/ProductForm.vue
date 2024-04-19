@@ -47,7 +47,7 @@
                                         Thêm vào xem sau
                                     </button> -->
                                     <button class="btn btn-primary  text-uppercase mr-2 px-4" @click="addToCart">
-                                        Thêm vào xem sau
+                                        Thêm
                                     </button>
                                 </div>
                             </div>

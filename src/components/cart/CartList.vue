@@ -14,10 +14,7 @@
                             </div>
                             <!--sản phẩm -->
                             <div class="col-lg-6">
-                                <div v-if="products.length === 0" class="text-center">
-                                    <h5 class="text-success">Không có sản phẩm nào trong giỏ hàng của bạn!!</h5>
-                                </div>
-                                <div v-else>
+                                <div>
                                     <div v-for="(product, index) in products" :key="product._id"
                                         :class="{ active: index === activeIndex }" class="card mb-3 border-0 bg-light" 
                                         style="transform: translateY(0px);">
@@ -58,7 +55,7 @@
                                         <div class="d-flex justify-content-between align-items-center mb-4">
                                             <h5 class="mb-0">Thông tin</h5>
                                         </div>
-                                        <form class="mt-4">
+                                        <form class="mt-4" @submit.prevent="submitForm">
                                             <div v-if="products.length > 0">
                                                 <div class="form-group mb-4 d-none ">
                                                     <label for="userId" class="form-label">User ID</label>
@@ -106,6 +103,7 @@
 
 <script>
 import CartService from "@/services/cart.service";
+import OrderService from "@/services/order.service";
 import Cookies from 'js-cookie';
 export default {
     props: {
@@ -136,6 +134,38 @@ export default {
             alert("Xóa sản phẩm khỏi giỏ hàng thành công!");
             window.location.reload();
         },
+        addBookToLoan() {
+            this.products.forEach(product => {
+                this.books.push({
+                    title: product.title,
+                    bookId: product._id,
+                    quantity: product.quantity
+                });
+            });
+        },
+        async submitForm() {
+            this.addBookToLoan();
+
+            // Tạo đối tượng loanInfo để lưu thông tin mượn sách
+            const loanInfo = {
+                userId: this.userId,
+                name: this.name,
+                ngayMuon: this.ngayMuon,
+                ngayTra: this.ngayTra,
+                books: this.books
+            };
+
+            // Gửi thông tin mượn sách đi xử lý
+            try {
+                await OrderService.add(loanInfo);
+                await CartService.deleteCart(this.userId);
+                alert("Đăng ký mượn thành công!");
+                window.location.reload();
+            } catch (error) {
+                console.error("Lỗi khi thêm vào giỏ hàng:", error);
+                alert("Đã xảy ra lỗi khi thêm vào giỏ hàng. Vui lòng thử lại sau!");
+            }
+        }
     }
 };
 </script>
