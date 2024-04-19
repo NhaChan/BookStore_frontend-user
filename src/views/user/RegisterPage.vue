@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <h4 class="text-center">Đăng ký</h4>
+    <div class="container mt-2">
+        <h4 class="text-center text-primary fw-bold">Đăng ký</h4>
         <div class="col-md-5 mx-auto">
             <RegisterForm @submit:register="addUser" />
         </div>

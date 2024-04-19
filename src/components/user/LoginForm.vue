@@ -11,7 +11,7 @@
             <ErrorMessage name="password" class="error-feedback text-danger" />
         </div>
         <div class="text-center">
-            <p>Bạn chưa có tài khoản? <router-link to="/register">Đăng ký</router-link></p>
+            <p>Bạn chưa có tài khoản? <router-link to="/register" style="text-decoration: none;">Đăng ký</router-link></p>
         </div>
         <div class="form-group d-flex justify-content-center">
             <button class="btn btn-primary" type="submit">Đăng nhập
@@ -51,7 +51,48 @@ export default {
 </script>
 
 <style scoped>
-.login-form .form-group {
-    margin-bottom: 20px;
+.login-form {
+    background-color: #f8f9fa;
+    /* border: 1px solid #dee2e6; */
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.form-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.error-feedback {
+    margin-top: 0.5rem;
 }
 </style>

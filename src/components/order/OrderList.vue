@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <router-link v-if="order.status === 'Mượn'" to="#" class="btn btn-sm btn-danger"
+                            <router-link v-if="order.status === 'Đang chờ duyệt'" to="#" class="btn btn-sm btn-danger"
                                 @click="submit(order._id)">
                                 Hủy mượn
                             </router-link>
