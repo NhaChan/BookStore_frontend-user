@@ -27,8 +27,11 @@
                                         <p>Tác giả: <span>{{ productLocal.author }}</span></p>
                                     </div>
                                     <div class="price d-flex flex-row align-items-center">
-                                        <p>Thể loại: <span>{{ productLocal.genre }}</span></p>
+                                        <p>Thể loại: <span>{{ productLocal.genre }} | {{ productLocal.publisher }}</span></p>
                                     </div>
+                                    <!-- <div class="price d-flex flex-row align-items-center">
+                                        <p>Nhà xuất bản: <span>{{ productLocal.publisher }}</span></p>
+                                    </div> -->
                                 </div>
                                 <h6>Mô tả:</h6>
                                 <p class="about">{{ productLocal.description }}</p>

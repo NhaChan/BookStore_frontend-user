@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-8 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+        <div class="col-9">
             <div class="d-flex flex-wrap mt-3">
                 <div v-for="(genre, index) in genres" :key="index" class="mb-1 me-1">
                     <button type="button" class="btn btn-light text-start" data-bs-toggle="button"
@@ -10,10 +10,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-4 col-lg-auto mb-3 mb-lg-0 me-lg-3 mt-3 ms-5 ">
+        <div class="col-3 mt-3">
             <form role="search">
                 <InputSearch v-model="searchText" />
-                
                 <!-- <input type="search" class="form-control" placeholder="Search..." aria-label="Search"> -->
             </form>
         </div>
@@ -57,32 +56,23 @@ export default {
     },
     computed: {
         filteredProducts() {
-            if (!this.selectedGenres.length) return this.products;
-            return this.products.filter(contact => this.selectedGenres.includes(contact.genre));
+            if (!this.selectedGenres.length && !this.searchText) return this.products;
+            let filtered = this.products;
+            if (this.selectedGenres.length) {
+                filtered = filtered.filter(product => this.selectedGenres.includes(product.genre));
+            }
+            if (this.searchText) {
+                const searchTextLower = this.searchText.toLowerCase();
+                filtered = filtered.filter(product => product.title.toLowerCase().includes(searchTextLower));
+            }
+            return filtered;
         },
         filteredProductsCount() {
             return this.filteredProducts.length;
         },
-        // Chuyển các đối tượng contact thành chuỗi để tiện cho tìm kiếm.
-        contactStrings() {
-            return this.Products.map((product) => {
-                const { title, author, genre } = product;
-                return [title, author, genre].join("");
-            });
-        },
-        // Trả về các contact có chứa thông tin cần tìm kiếm.
-        filteredContacts() {
-            if (!this.searchText) return this.Products;
-            return this.Products.filter((_product, index) =>
-                this.contactStrings[index].includes(this.searchText)
-            );
-        },
         activeContact() {
-            if (this.activeIndex < 0) return null;
-            return this.filteredContacts[this.activeIndex];
-        },
-        filteredContactsCount() {
-            return this.filteredContacts.length;
+            if (this.activeIndex < 0 || this.activeIndex >= this.filteredProducts.length) return null;
+            return this.filteredProducts[this.activeIndex];
         },
     },
     methods: {
@@ -96,8 +86,8 @@ export default {
         },
         extractGenres(products) {
             const genresSet = new Set();
-            products.forEach(contact => {
-                genresSet.add(contact.genre);
+            products.forEach(product => {
+                genresSet.add(product.genre);
             });
             return Array.from(genresSet);
         },
@@ -112,9 +102,6 @@ export default {
                 this.selectedGenres.push(genre);
             }
         },
-        mounted() {
-            this.refreshList();
-        }
     },
     mounted() {
         this.refreshList();
