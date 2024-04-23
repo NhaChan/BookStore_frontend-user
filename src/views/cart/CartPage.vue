@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h4 class="text-center mt-4 text-success">Giỏ hàng</h4>
+        <h4 class="text-center mt-4 text-success">Sách muốn mượn</h4>
         <div class="mt-2">
             <CartList :products="cart" />
         </div>

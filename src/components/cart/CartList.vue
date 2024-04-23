@@ -56,7 +56,7 @@
                                             <h5 class="mb-0">Thông tin</h5>
                                         </div>
                                         <form class="mt-4" @submit.prevent="submitForm">
-                                            <div v-if="products.length > 0">
+                                            <div>
                                                 <div class="form-group mb-4 d-none ">
                                                     <label for="userId" class="form-label">User ID</label>
                                                     <input type="text" id="userId" class="form-control form-control-lg"
@@ -78,11 +78,12 @@
                                                         class="form-control form-control-lg" v-model="ngayMuon"
                                                         required>
                                                 </div>
-                                                <div class="form-group mb-4">
+                                                <div class="form-group mb-4 text-primary fw-bold"> Phải trả sách trước thời hạn 2 tuần kể từ ngày mượn!</div>
+                                                <!-- <div class="form-group mb-4">
                                                     <label for="ngayTra" class="form-label">Ngày trả</label>
                                                     <input type="date" id="ngayTra" class="form-control form-control-lg"
                                                         v-model="ngayTra" required>
-                                                </div>
+                                                </div> -->
                                                 
                                                 <button type="submit" class="btn btn-success btn-lg bg-success">
                                                     Mượn
@@ -143,8 +144,16 @@ export default {
                 });
             });
         },
+
+        calculateDefaultReturnDate() {
+            // Tính toán ngày trả mặc định sau 2 tuần từ ngày mượn
+            const loanDate = new Date(this.ngayMuon);
+            const returnDate = new Date(loanDate.getTime() + (14 * 24 * 60 * 60 * 1000)); // 2 tuần = 14 ngày
+            return returnDate.toISOString().substr(0, 10); // Chuyển đổi sang định dạng yyyy-MM-dd
+        },
         async submitForm() {
             this.addBookToLoan();
+            this.ngayTra = this.calculateDefaultReturnDate();
 
             // Tạo đối tượng loanInfo để lưu thông tin mượn sách
             const loanInfo = {
@@ -161,6 +170,7 @@ export default {
                 await CartService.deleteCart(this.userId);
                 alert("Đăng ký mượn thành công!");
                 window.location.reload();
+                // window.location.href = '/';
             } catch (error) {
                 console.error("Lỗi khi thêm vào giỏ hàng:", error);
                 alert("Đã xảy ra lỗi khi thêm vào giỏ hàng. Vui lòng thử lại sau!");

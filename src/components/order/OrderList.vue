@@ -13,7 +13,9 @@
                         </h5>
                     </div>
                     <div class="card-body text-center">
-                        Ngày: {{ order.ngayMuon }}
+                        Mượn: {{ order.ngayMuon }}
+                        <hr>
+                        Trả : {{ order.ngayTra }}
                     </div>
                 </div>
             </div>
