@@ -13,9 +13,9 @@
           <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li> -->
         </ul>
 
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+        <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-        </form>
+        </form> -->
 
         <div class="d-flex align-items-center"> <!-- Thêm d-flex và align-items-center để căn giữa nút và biểu tượng -->
           <div class="dropdown text-end" v-if="userName">
@@ -25,7 +25,7 @@
               {{ userName }}
             </a>
             <ul class="dropdown-menu text-small" style="">
-              <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
+              <!-- <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li> -->
               <li>
                 <router-link :to="{ name: 'order', params: { id: userId }, }" class="dropdown-item">Sách đã mượn</router-link>
               </li>
