@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <h3 class="text-center mt-2 text-success">Sách đã mượn</h3>
-        <div class="col-md-6 mx-auto">
-            <OrderForm :orders="order"/>
+        <div class="col-md-10 mx-auto">
+            <OrderForm :orders="order" />
         </div>
     </div>
 </template>
